@@ -1,6 +1,13 @@
 import paho.mqtt.client as mqtt
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+IP_ADDRESS = os.environ.get('IP_ADDRESS')
 
 
+# Define event callbacks
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
@@ -18,6 +25,6 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 
-client.connect("192.168.1.x", 1883, 60)
+client.connect('127.0.0.1', 1883, 60)
 
 client.loop_forever()
